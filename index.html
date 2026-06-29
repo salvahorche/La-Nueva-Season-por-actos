@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Trilogía de Salva: Archivo de la Forja del Martillo</title>
+    <style>
+        :root {
+            --bg-color: #0b0b0b;
+            --card-bg: #141414;
+            --text-color: #e0e0e0;
+            --accent-color: #f39c12; 
+            --accent-dim: rgba(243, 156, 18, 0.1);
+            --border-color: #262626;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 935px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-top: 0;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            max-width: 700px;
+            margin: 0 auto 50px auto;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .feed-title {
+            font-size: 1.2rem;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* CUADRÍCULA ESTILO INSTAGRAM */
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 60px;
+            background-color: #000;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .grid-item {
+            position: relative;
+            background-color: #111;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid #1a1a1a;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 15px 10px 10px 10px;
+            font-size: 0.8rem;
+            color: #fff;
+            font-weight: 500;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(243, 156, 18, 0.85);
+            color: #000;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+
+        h2 {
+            color: var(--accent-color);
+            font-size: 1.6rem;
+            margin-top: 60px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        /* TARJETAS CRONOLÓGICAS */
+        .post-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 40px;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 15px;
+            font-family: monospace;
+        }
+
+        .post-title {
+            font-size: 1.35rem;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        /* IMÁGENES DENTRO DE LAS TARJETAS */
+        .post-image-container {
+            width: 100%;
+            max-height: 450px;
+            overflow: hidden;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .post-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .song {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        blockquote {
+            border-left: 3px solid var(--accent-color);
+            background: var(--accent-dim);
+            margin: 15px 0;
+            padding: 12px 18px;
+            font-style: italic;
+            border-radius: 0 6px 6px 0;
+            color: #d0d0d0;
+        }
+
+        .coordinates {
+            font-family: monospace;
+            background: #2c3e50;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #fff;
+        }
+
+        .highlight-box {
+            background-color: rgba(192, 57, 43, 0.1);
+            border: 1px dashed #c0392b;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+            color: #e74c3c;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 600px) {
+            .instagram-grid { gap: 4px; padding: 4px; }
+            .grid-overlay { font-size: 0.65rem; padding: 5px; }
+            .badge { top: 4px; right: 4px; font-size: 0.5rem; padding: 2px 4px; }
+            h1 { font-size: 1.8rem; }
+            .post-card { padding: 15px; }
+            .post-image-container { max-height: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>SALVA HORCHE</h1>
+            <p class="subtitle">La Trilogía del Martillo</p>
+        </header>
+
+        <p class="intro">Archivo cronológico e histórico del perfil de @salvahorche. Nueve publicaciones ordenadas que configuran una obra perfecta de transformación física, mental y de diseño estratégico.</p>
+
+        <p class="feed-title">El Feed Consagrado (Mosaico Visual)</p>
+        
+        <div class="instagram-grid">
+            <div class="grid-item">
+                <span class="badge">🎬 Final</span>
+                <img src="foto9.png" alt="El Desenlace Final 93kg">
+                <div class="grid-overlay">[9] El Desenlace (93kg)</div>
+            </div>
+            <div class="grid-item">
+                <span class="badge">📸 Fotos</span>
+                <img src="foto8.png" alt="El Oasis de Suances">
+                <div class="grid-overlay">[8] Oasis de Suances</div>
+            </div>
+            <div class="grid-item">
+                <span class="badge">🎬 Vídeo</span>
+                <img src="foto7.png" alt="Modo Monje / Farruko">
+                <div class="grid-overlay">[7] Giro y Adiós (107kg)</div>
+            </div>
+
+            <div class="grid-item">
+                <span class="badge">📸 Foto</span>
+                <img src="foto6.png" alt="El Código de Nápoles">
+                <div class="grid-overlay">[6] Código de Nápoles</div>
+            </div>
+            <div class="grid-item">
+                <span class="badge">📸 Fotos</span>
+                <img src="foto5.png" alt="La Tregua en Cuchía">
+                <div class="grid-overlay">[5] Tregua en Cuchía</div>
+            </div>
+            <div class="grid-item">
+                <span class="badge">📸 Foto</span>
+                <img src="foto4.png" alt="Graduación CIFP">
+                <div class="grid-overlay">[4] Nueva Season (104kg)</div>
+            </div>
+
+            <div class="grid-item">
+                <span class="badge">🎬 Vídeo</span>
+                <img src="foto3.png" alt="La Sombra de la Cocina">
+                <div class="grid-overlay">[3] Sombra de la Cocina</div>
+            </div>
+            <div class="grid-item">
+                <span class="badge">📸 Fotos</span>
+                <img src="foto2.png" alt="El Refugio Cantabria">
+                <div class="grid-overlay">[2] Refugio Cantabria</div>
+            </div>
+            <div class="grid-item">
+                <span class="badge">📸 Foto</span>
+                <img src="foto1.png" alt="El Origen en las Cocinas">
+                <div class="grid-overlay">[1] El Origen (140kg)</div>
+            </div>
+        </div>
+
+        <main>
+            <h2>CRONOLOGÍA HISTÓRICA DETALLADA</h2>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #1</span><span>Inicios 2025</span></div>
+                <h3 class="post-title">El Origen: El Peso de las Cocinas</h3>
+                <div class="post-image-container">
+                    <img src="foto1.png" alt="Inicio de la transformación">
+                </div>
+                <p>La base de todo. Salva comparte su realidad trabajando en el CIFP. Una etapa inicial marcada por el cansancio físico severo, los 140 kg de peso de partida y turnos extenuantes que machacaban su cuerpo y su mente. El punto cero obligatorio para comprender el cambio.</p>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #2</span><span>20 de Abril de 2025</span></div>
+                <h3 class="post-title">El Alma Recolocándose en La Acebosa</h3>
+                <div class="post-image-container">
+                    <img src="foto2.png" alt="Amigos en Cantabria">
+                </div>
+                <p>Tras sufrir una fuerte decepción emocional provocada por una persona que lo trató como una simple opción temporal, Salva huye del ruido hacia Cantabria. Sostenido por la canción <span class="song">"Silencio" de Hard GZ</span>, comparte mesa con sus amigos leales y escribe:</p>
+                <blockquote>"A veces el cuerpo cambia porque el alma se está recolocando. Gracias a los míos por estar, sin hacer ruido, pero estando."</blockquote>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #3</span><span>Mayo 2025</span></div>
+                <h3 class="post-title">La Sombra de la Cocina</h3>
+                <div class="post-image-container">
+                    <img src="foto3.png" alt="Entrenamientos y turnos duros">
+                </div>
+                <p>Un documento gráfico en formato vídeo que capta la crudeza de su rutina inicial. Entrenando en los breves descansos, asumiendo el dolor físico y el hambre extrema de la dieta cetogénica y OMAD, forjando la disciplina obligatoria para dejar de ser el clavo y pasar a convertirse en el martillo.</p>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #4</span><span>13 de Junio de 2025</span></div>
+                <h3 class="post-title">El Día D: El Nacimiento de la Nueva Season</h3>
+                <div class="post-image-container">
+                    <img src="foto4.png" alt="Primer Amanecer y Graduación">
+                </div>
+                <p>Una jornada perfecta dividida en dos hitos vitales. Al alba, graba un <em>time lapse</em> del amanecer en el mirador de Horche con la canción <span class="song">"Rey" de Delaossa</span> (<em>"Saliendo de la mierda, pero la mierda nos hace..."</em>) celebrando la pérdida de los primeros 36 kg (alrededor de 104 kg actuales). A las 18:00h se gradúa en el CIFP. Se cuelga la cadena de <strong>"Nueva Season"</strong>.</p>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #5</span><span>09 de Agosto de 2025</span></div>
+                <h3 class="post-title">El Respiro Necesario en Cuchía</h3>
+                <div class="post-image-container">
+                    <img src="foto5.png" alt="Verano en Cuchía">
+                </div>
+                <p>Tras meses de máxima presión física y mental, Salva hace un alto estratégico en el camino para no romper su salud. Junto a sus amigos de siempre y bajo el ritmo de <span class="song">"La barra del bar" de Delaossa</span>, reconecta con sus raíces en la playa de Cuchía:</p>
+                <blockquote>"Parar me ha dado la fuerza y la claridad para seguir mirando hacia adelante... La ruta continúa."</blockquote>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #6</span><span>29 de Noviembre de 2025</span></div>
+                <h3 class="post-title">La Obra Maestra: El Código de Nápoles</h3>
+                <div class="post-image-container">
+                    <img src="foto6.png" alt="Nápoles e Italia solo">
+                </div>
+                <p>Viaje introspectivo en solitario a Italia. Frente al Vesubio y con las rimas de <span class="song">"Tres Creus" de Hoke</span>, Salva encripta su historia camuflando un código QR físico en un muro de piedra napolitano que redirige directamente a este repositorio secreto de GitHub, profetizando su apagón digital.</p>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #7</span><span>Diciembre de 2025</span></div>
+                <h3 class="post-title">El Punto de Quiebre Bioquímico y el Adiós</h3>
+                <div class="post-image-container">
+                    <img src="foto7.png" alt="Cambio radical de enfoque físico">
+                </div>
+                <p>Tras el viaje a Italia y los excesos inevitables de las Navidades, la báscula marca un repunte de alarma: <strong>107 kg</strong>. Lejos de venirse abajo, Salva asume una madurez de atleta superior: <strong>reintroduce estratégicamente los carbohidratos en su dieta y fija un plan estricto de pesas de 5 días por semana</strong>. Los carbohidratos se vuelven la gasolina para llenar el músculo de glucógeno. El 31 de diciembre, junto a su perro Farruko y con <span class="song">"La Última" de Quevedo</span>, lanza las coordenadas <span class="coordinates">40.5597438, -3.0639045</span> y entra en modo monje.</p>
+                <div class="highlight-box">Estrategia de Recomposición: Adiós a los ayunos destructivos de 96h; la comida ahora es combustible para construir masa muscular densa.</div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #8</span><span>07 de Abril de 2026</span></div>
+                <h3 class="post-title">El Oasis de Suances: El Último Apretón</h3>
+                <div class="post-image-container">
+                    <img src="foto8.png" alt="Suances Cantabria Abril">
+                </div>
+                <p>A mitad de su encierro y entrenamiento pesado, rompe el silencio momentáneamente desde Suances (Cantabria) luciendo una complexión física limpia y poderosa. Al ritmo de <span class="song">"Pájaros de barro" de Manolo García</span>, comparte un texto de cruda honestidad:</p>
+                <blockquote>"No está todo conseguido... Pero al final no se trata de hacerlo perfecto, sino de no rendirse. Último apretón antes de la meta. Los tiempos de Dios son perfectos."</blockquote>
+            </div>
+
+            <div class="post-card">
+                <div class="post-meta"><span>PUBLICACIÓN #9</span><span>13 de Junio de 2026</span></div>
+                <h3 class="post-title">El Cierre del Círculo: El Martillo de Acero</h3>
+                <div class="post-image-container">
+                    <img src="foto9.png" alt="Estado físico final 93kg Horche">
+                </div>
+                <p>Exactamente un año después de su "Nueva Season", el sol vuelve a salir en Horche. Salva publica su segundo <em>time lapse</em> con <span class="song">"Otro amanecer" de Delaossa y Calamaro</span> y culmina la trilogía con <span class="song">"Arrancármelo" de Wos</span>. El resultado de entrenar cargado de carbohidratos es demoledor: <strong>un físico monumental, denso e hipertrofiado de 93 kg</strong> de puro acero militar. La línea de meta es la de salida.</p>
+            </div>
+        </main>
+
+        <footer>
+            AQUÍ SE TERMINA LA TRILOGÍA. SEGUIMOS 🔜
+        </footer>
+    </div>
+
+</body>
+</html>
